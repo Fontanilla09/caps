@@ -34,7 +34,17 @@ export function LoginPage() {
   };
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 px-4 bg-slate-50">
+    <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center py-12 px-4 bg-slate-50">
+      <div className="w-full max-w-md mb-4 flex items-center">
+        <Button
+          type="button"
+          variant="ghost"
+          className="p-0"
+          onClick={() => navigate(-1)}
+        >
+          <span className="text-xl">←</span> <span className="ml-2">Back</span>
+        </Button>
+      </div>
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
@@ -56,6 +66,8 @@ export function LoginPage() {
               </div>
             )}
           </Tabs>
+
+
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">

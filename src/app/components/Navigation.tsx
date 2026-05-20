@@ -11,7 +11,7 @@ export function Navigation() {
 
   const handleLogout = () => {
     logout();
-    navigate("/");
+    navigate("/login");
     setMobileMenuOpen(false);
   };
 
@@ -55,16 +55,7 @@ export function Navigation() {
                   Logout
                 </Button>
               </div>
-            ) : (
-              <div className="flex items-center gap-3">
-                <Link to="/login">
-                  <Button variant="ghost">Login</Button>
-                </Link>
-                <Link to="/register">
-                  <Button>Get Started</Button>
-                </Link>
-              </div>
-            )}
+            ) : null}
           </div>
 
           {/* Mobile Menu Button */}
@@ -124,13 +115,7 @@ export function Navigation() {
                   >
                     Login
                   </Link>
-                  <Link
-                    to="/register"
-                    className="px-4 py-2 text-slate-700 hover:bg-slate-100 rounded"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Get Started
-                  </Link>
+                  {/* Removed Get Started button from mobile menu */}
                 </>
               )}
             </div>

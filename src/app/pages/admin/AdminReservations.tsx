@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../components/ui/dialog";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
 import { Button } from "../../components/ui/button";
 import { Badge } from "../../components/ui/badge";
@@ -88,19 +89,38 @@ export function AdminReservations() {
     return <Badge variant={config.variant}>{config.label}</Badge>;
   };
 
+  const [selectedBooking, setSelectedBooking] = useState(null);
+  const [confirmType, setConfirmType] = useState<"accept" | "reject" | null>(null);
+
   const handleAcceptBooking = (id: string) => {
-    alert(`Booking ${id} accepted!`);
+    setSelectedBooking(id);
+    setConfirmType("accept");
   };
 
   const handleRejectBooking = (id: string) => {
-    if (confirm("Are you sure you want to reject this booking?")) {
-      alert(`Booking ${id} rejected`);
+    setSelectedBooking(id);
+    setConfirmType("reject");
+  };
+
+  const handleConfirm = () => {
+    if (confirmType === "accept") {
+      alert(`Booking ${selectedBooking} accepted!`);
+    } else if (confirmType === "reject") {
+      alert(`Booking ${selectedBooking} rejected`);
     }
+    setSelectedBooking(null);
+    setConfirmType(null);
+  };
+
+  const handleCancel = () => {
+    setSelectedBooking(null);
+    setConfirmType(null);
   };
 
   return (
     <div className="py-12 px-4 bg-slate-50">
       <div className="container mx-auto max-w-7xl">
+        <Button variant="outline" size="sm" onClick={() => window.history.back()} className="mb-4">Back</Button>
         <div className="mb-8">
           <h1 className="text-4xl mb-2 text-slate-900">Reservations</h1>
           <p className="text-slate-600">Manage customer bookings and reservations</p>
@@ -252,6 +272,28 @@ export function AdminReservations() {
             </Card>
           ))}
         </div>
+
+        {/* Confirmation Dialog */}
+        <Dialog open={!!confirmType} onOpenChange={handleCancel}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>
+                {confirmType === "accept" ? "Accept Booking" : "Reject Booking"}
+              </DialogTitle>
+              <DialogDescription>
+                {confirmType === "accept"
+                  ? "Are you sure you want to accept this booking? The customer will be notified."
+                  : "Are you sure you want to reject this booking? The customer will be notified."}
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex gap-3 justify-end mt-4">
+              <Button variant="outline" onClick={handleCancel}>Cancel</Button>
+              <Button onClick={handleConfirm} variant={confirmType === "accept" ? "default" : "destructive"}>
+                Confirm
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
 
         {filteredReservations.length === 0 && (
           <Card>

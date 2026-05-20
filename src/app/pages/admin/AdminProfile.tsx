@@ -64,6 +64,7 @@ export function AdminProfile() {
   return (
     <div className="py-12 px-4 bg-slate-50">
       <div className="container mx-auto max-w-4xl">
+        <Button variant="outline" size="sm" onClick={() => window.history.back()} className="mb-4">Back</Button>
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>

@@ -93,6 +93,7 @@ export function AdminMessages() {
     <div className="py-12 px-4 bg-slate-50">
       <div className="container mx-auto max-w-7xl">
         <div className="mb-8">
+          <Button variant="outline" size="sm" onClick={() => window.history.back()} className="mb-4">Back</Button>
           <h1 className="text-4xl mb-2 text-slate-900">Messages</h1>
           <p className="text-slate-600">Communicate with your customers in real-time</p>
         </div>

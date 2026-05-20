@@ -20,7 +20,13 @@ export function HomePage() {
             <p className="text-xl mb-8 text-blue-100">
               Visualize your dream event before it happens. Book verified caterers with confidence.
             </p>
-            {/* Removed Browse Packages, Venue Visualizer, Login, and Get Started buttons as requested */}
+            <div className="flex justify-center">
+              <Link to="/register">
+                <Button size="lg" className="mt-4 px-8 py-3 text-lg font-semibold rounded-full shadow-lg bg-white text-blue-700 hover:bg-blue-50">
+                  Get Started
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
@@ -183,22 +189,7 @@ export function HomePage() {
       </section>
       )}
 
-      {/* CTA Section */}
-      {isCustomerOrGuest && (
-        <section className="py-16 bg-blue-600 text-white">
-          <div className="container mx-auto px-4 text-center">
-            <h2 className="text-3xl mb-4">Ready to Plan Your Perfect Event?</h2>
-            <p className="text-xl mb-8 text-blue-100">
-              Join hundreds of satisfied customers who have brought their vision to life
-            </p>
-            <Link to="/register">
-              <Button size="lg" variant="secondary">
-                Create Free Account
-              </Button>
-            </Link>
-          </div>
-        </section>
-      )}
+      {/* CTA Section removed as requested */}
     </div>
   );
 }

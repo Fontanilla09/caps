@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { hasCatererConflict } from "../../components/ui/utils";
 import { useParams, useNavigate } from "react-router";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
@@ -25,8 +26,47 @@ export function BookingForm() {
   const [specialRequests, setSpecialRequests] = useState("");
   const [agreedToTerms, setAgreedToTerms] = useState(false);
 
+
+  // Import the reservations and package data (mocked for now)
+  // In a real app, fetch these from context or API
+  const MOCK_RESERVATIONS = [
+    {
+      id: "1",
+      caterer: "Premium Catering Co.",
+      date: "2026-06-15",
+      time: "18:00",
+      status: "confirmed",
+    },
+    {
+      id: "2",
+      caterer: "Business Events Pro",
+      date: "2026-05-25",
+      time: "14:00",
+      status: "pending",
+    },
+    // ...add more as needed
+  ];
+
+  // Find the selected package and its caterer
+  const MOCK_PACKAGES = [
+    { id: "1", name: "Elegant Wedding Package", caterer: "Premium Catering Co." },
+    { id: "2", name: "Corporate Event Deluxe", caterer: "Business Events Pro" },
+    // ...add more as needed
+  ];
+  const selectedPackage = MOCK_PACKAGES.find((p) => p.id === packageId) || MOCK_PACKAGES[0];
+  const catererName = selectedPackage.caterer;
+
+  const [conflict, setConflict] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Check for conflict before proceeding
+    const dateStr = date ? date.toISOString().split("T")[0] : "";
+    if (hasCatererConflict(MOCK_RESERVATIONS, catererName, dateStr, time)) {
+      setConflict(true);
+      return;
+    }
+    setConflict(false);
     // Mock booking creation
     const bookingId = Math.random().toString(36).substr(2, 9);
     navigate(`/payment/${bookingId}`);
@@ -50,6 +90,7 @@ export function BookingForm() {
         </Button>
 
         <h1 className="text-4xl mb-4 text-slate-900">Request Your Booking</h1>
+
         <Alert className="mb-8 border-blue-200 bg-blue-50">
           <Info className="w-5 h-5 text-blue-600" />
           <AlertDescription className="text-blue-900">
@@ -58,6 +99,15 @@ export function BookingForm() {
             until the caterer verifies your payment in your dashboard.
           </AlertDescription>
         </Alert>
+
+        {conflict && (
+          <Alert className="mb-6 border-red-200 bg-red-50">
+            <AlertCircle className="w-5 h-5 text-red-600" />
+            <AlertDescription className="text-red-900">
+              <strong>Conflict detected:</strong> The selected caterer is already booked for your chosen date and time. Please choose a different slot.
+            </AlertDescription>
+          </Alert>
+        )}
 
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Booking Form */}

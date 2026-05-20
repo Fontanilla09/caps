@@ -62,6 +62,15 @@ export function CatererVerification() {
   return (
     <div className="py-12 px-4 bg-slate-50">
       <div className="container mx-auto max-w-7xl">
+        {/* Back Button */}
+        <div className="mb-4">
+          <a href="/superadmin/dashboard" className="inline-flex items-center gap-2 text-blue-600 hover:underline font-medium">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+            </svg>
+            Back to Dashboard
+          </a>
+        </div>
         <div className="mb-8">
           <h1 className="text-4xl mb-2 text-slate-900">Caterer Verification</h1>
           <p className="text-slate-600 mb-4">Review and approve caterer applications submitted to your account</p>

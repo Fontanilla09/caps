@@ -49,98 +49,54 @@ export function SuperAdminDashboard() {
           <p className="text-slate-600">Platform overview and management</p>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardHeader className="pb-3">
-              <CardDescription>Total Users</CardDescription>
-              <CardTitle className="text-3xl">{MOCK_STATS.totalUsers}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-2 text-sm text-slate-600">
-                <Users className="w-4 h-4" />
-                <span>{MOCK_STATS.totalCustomers} customers, {MOCK_STATS.totalCaterers} caterers</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Link to="/superadmin/verification" className="block">
-            <Card className="hover:shadow-md transition cursor-pointer h-full">
+        {/* Stats Grid - Only Caterer Monitoring */}
+        <div className="flex flex-col items-center mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
+            <Card>
               <CardHeader className="pb-3">
-                <CardDescription>Pending Verifications</CardDescription>
-                <CardTitle className="text-3xl text-amber-600">{MOCK_STATS.pendingVerifications}</CardTitle>
+                <CardDescription>Total Caterers</CardDescription>
+                <CardTitle className="text-3xl">{MOCK_STATS.totalCaterers}</CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center gap-2 text-sm text-amber-600">
-                  <AlertCircle className="w-4 h-4" />
-                  <span>Requires attention</span>
+                <div className="flex items-center gap-2 text-sm text-slate-600">
+                  <Users className="w-4 h-4" />
+                  <span>{MOCK_STATS.totalCaterers} caterers</span>
                 </div>
               </CardContent>
             </Card>
-          </Link>
 
-          <Card>
-            <CardHeader className="pb-3">
-              <CardDescription>Active Bookings</CardDescription>
-              <CardTitle className="text-3xl">{MOCK_STATS.activeBookings}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-2 text-sm text-green-600">
-                <Calendar className="w-4 h-4" />
-                <span>Across all caterers</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="pb-3">
-              <CardDescription>Platform Revenue</CardDescription>
-              <CardTitle className="text-3xl">₱{(MOCK_STATS.totalRevenue / 1000000).toFixed(1)}M</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-2 text-sm text-green-600">
-                <TrendingUp className="w-4 h-4" />
-                <span>+{MOCK_STATS.revenueGrowth}% this month</span>
-              </div>
-            </CardContent>
-          </Card>
+            <Link to="/superadmin/verification" className="block">
+              <Card className="hover:shadow-md transition cursor-pointer h-full">
+                <CardHeader className="pb-3">
+                  <CardDescription>Pending Caterer Verifications</CardDescription>
+                  <CardTitle className="text-3xl text-amber-600">{MOCK_STATS.pendingVerifications}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center gap-2 text-sm text-amber-600">
+                    <AlertCircle className="w-4 h-4" />
+                    <span>Requires attention</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
         </div>
 
-        {/* Quick Actions */}
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <Link to="/superadmin/verification">
-            <Card className="hover:shadow-md transition cursor-pointer">
-              <CardHeader>
-                <Building2 className="w-8 h-8 mb-2 text-blue-600" />
-                <CardTitle>Caterer Verification</CardTitle>
-                <CardDescription>
-                  Review and approve pending caterer applications
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/superadmin/users">
-            <Card className="hover:shadow-md transition cursor-pointer">
-              <CardHeader>
-                <Users className="w-8 h-8 mb-2 text-blue-600" />
-                <CardTitle>User Management</CardTitle>
-                <CardDescription>
-                  Manage all platform users and accounts
-                </CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Card className="hover:shadow-md transition cursor-pointer">
-            <CardHeader>
-              <DollarSign className="w-8 h-8 mb-2 text-blue-600" />
-              <CardTitle>Platform Analytics</CardTitle>
-              <CardDescription>
-                View detailed revenue and usage statistics
-              </CardDescription>
-            </CardHeader>
-          </Card>
+        {/* Quick Actions - Only Caterer Verification */}
+        <div className="mb-8 flex flex-col items-center">
+          <div className="w-full max-w-2xl">
+            <Link to="/superadmin/verification">
+              <Card className="hover:shadow-md transition cursor-pointer">
+                <CardHeader>
+                  <Building2 className="w-8 h-8 mb-2 text-blue-600" />
+                  <CardTitle>Caterer Verification</CardTitle>
+                  <CardDescription>
+                    Review and approve pending caterer applications
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+            </Link>
+          </div>
         </div>
 
         {/* Recent Activity */}

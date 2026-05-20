@@ -263,7 +263,6 @@ export function AdminDashboard() {
                     ) : (
                       <Badge variant="secondary">Pending</Badge>
                     )}
-                    <Button size="sm" variant="outline">View Details</Button>
                   </div>
                 </div>
               ))}
