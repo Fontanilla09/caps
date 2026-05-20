@@ -294,14 +294,7 @@ export function CustomerDashboard() {
 
   return (
     <div className="flex min-h-screen bg-slate-50">
-      {/* Mobile menu button */}
-      <button
-        className="sm:hidden fixed top-4 left-4 z-30 bg-white border border-slate-200 rounded p-2 shadow"
-        onClick={() => setSidebarOpen(true)}
-        aria-label="Open menu"
-      >
-        <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></svg>
-      </button>
+      {/* Mobile menu button removed */}
 
       {/* Sidebar for desktop */}
       <aside className="hidden sm:flex fixed left-0 top-0 h-full w-64 bg-white border-r border-slate-200 flex-col z-20">
@@ -325,33 +318,7 @@ export function CustomerDashboard() {
         </nav>
       </aside>
 
-      {/* Sidebar drawer for mobile */}
-      {sidebarOpen && (
-        <div className="fixed inset-0 z-40 flex">
-          <div className="w-64 bg-white h-full shadow-lg flex flex-col">
-            <div className="h-16 flex items-center justify-center border-b border-slate-200 font-bold text-xl text-blue-700">
-              Customer
-            </div>
-            <nav className="flex-1 flex flex-col py-6">
-              {menu.map((item) => (
-                <button
-                  key={item.key}
-                  className={clsx(
-                    "flex items-center gap-3 px-6 py-3 text-slate-700 hover:bg-blue-50 transition font-medium text-left",
-                    active === item.key && "bg-blue-100 text-blue-700"
-                  )}
-                  onClick={() => handleMenuClick(item.key)}
-                >
-                  {item.icon}
-                  {item.label}
-                </button>
-              ))}
-            </nav>
-          </div>
-          {/* Overlay to close */}
-          <div className="flex-1 bg-black bg-opacity-20" onClick={() => setSidebarOpen(false)} />
-        </div>
-      )}
+      {/* Sidebar drawer for mobile removed */}
 
       {/* Main Content */}
       <main className="flex-1 sm:ml-64 p-4 sm:p-8">
