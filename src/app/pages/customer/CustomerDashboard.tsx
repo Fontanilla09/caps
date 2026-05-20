@@ -192,7 +192,6 @@ export function CustomerDashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [active, setActive] = useState("dashboard");
-  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   // Sidebar menu items
   const menu = [
@@ -210,11 +209,11 @@ export function CustomerDashboard() {
       <div>
         <h1 className="text-3xl font-bold mb-2 text-slate-900">Dashboard</h1>
         <p className="text-slate-600 mb-4">Here are your booking requests:</p>
-        <div className="bg-white rounded shadow p-4 sm:p-6 max-w-2xl overflow-x-auto">
+        <div className="bg-white rounded shadow p-6 max-w-2xl">
           {MOCK_BOOKINGS.length === 0 ? (
             <div className="text-slate-500">No booking requests yet.</div>
           ) : (
-            <table className="min-w-[600px] w-full text-left border-collapse">
+            <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b">
                   <th className="py-2 px-2"></th>
@@ -233,8 +232,10 @@ export function CustomerDashboard() {
                         className="bg-blue-100 hover:bg-blue-200 text-blue-700 px-2 py-1 rounded flex items-center gap-1"
                         title={`Chat with ${booking.caterer}`}
                         onClick={() => {
+                          // Try to find the chat user by caterer name
                           const chatUser = (window as any).selectChatUserByName?.(booking.caterer);
                           if (!chatUser) {
+                            // fallback: switch to messages tab
                             setActive("messages");
                           }
                         }}
@@ -288,16 +289,13 @@ export function CustomerDashboard() {
       setActive("logout");
     } else {
       setActive(key);
-      setSidebarOpen(false); // close sidebar on mobile
     }
   };
 
   return (
     <div className="flex min-h-screen bg-slate-50">
-      {/* Mobile menu button removed */}
-
-      {/* Sidebar for desktop */}
-      <aside className="hidden sm:flex fixed left-0 top-0 h-full w-64 bg-white border-r border-slate-200 flex-col z-20">
+      {/* Sidebar */}
+      <aside className="fixed left-0 top-0 h-full w-64 bg-white border-r border-slate-200 flex flex-col z-20">
         <div className="h-16 flex items-center justify-center border-b border-slate-200 font-bold text-xl text-blue-700">
           Customer
         </div>
@@ -318,10 +316,8 @@ export function CustomerDashboard() {
         </nav>
       </aside>
 
-      {/* Sidebar drawer for mobile removed */}
-
       {/* Main Content */}
-      <main className="flex-1 sm:ml-64 p-4 sm:p-8">
+      <main className="ml-64 flex-1 p-8">
         <div className="max-w-4xl mx-auto">
           {content[active]}
         </div>
