@@ -1,0 +1,22 @@
+# .gitignore
+# Ignore build output and dependencies
+node_modules/
+dist/
+build/
+.cache/
+.next/
+.output/
+.parcel-cache/
+.eslintcache
+*.log
+*.tmp
+*.lock
+*.DS_Store
+.env*
+.vscode/
+.idea/
+coverage/
+*.test.*
+*.spec.*
+.pnpm/
+.yarn/
