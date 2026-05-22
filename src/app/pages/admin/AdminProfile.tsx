@@ -192,7 +192,7 @@ export function AdminProfile() {
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-2">
-                  <Label>Business Permit / DTI Registration *</Label>
+                  <Label>Business Permit</Label>
                   <div className="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center hover:border-blue-500 transition cursor-pointer">
                     <input
                       id="permit-upload"
@@ -218,7 +218,7 @@ export function AdminProfile() {
                     </label>
                   </div>
                   <p className="text-sm text-slate-500">
-                    Please upload a clear copy of your business permit or DTI registration certificate
+                    Please upload a clear copy of your business permit
                   </p>
                 </div>
 
@@ -226,7 +226,7 @@ export function AdminProfile() {
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                     <h4 className="font-medium text-blue-900 mb-2">Verification Requirements:</h4>
                     <ul className="text-sm text-blue-800 space-y-1 list-disc list-inside">
-                      <li>Valid business permit or DTI registration</li>
+                      <li>Valid business permit</li>
                       <li>Complete business information</li>
                       <li>Clear and readable document copy</li>
                     </ul>

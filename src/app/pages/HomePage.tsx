@@ -66,7 +66,7 @@ export function HomePage() {
       {/* Features Section */}
       <section className="py-16 bg-slate-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl text-center mb-12 text-slate-900">Why Choose CaterAI?</h2>
+          {/* CaterAI mention removed from hero section */}
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <Card>
               <CardHeader>

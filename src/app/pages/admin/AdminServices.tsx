@@ -230,9 +230,7 @@ export function AdminServices() {
                     <DollarSign className="w-4 h-4" />
                     <span className="text-lg text-slate-900">₱{service.price.toLocaleString()}</span>
                   </div>
-                  <div className="text-sm text-slate-600 pt-2 border-t">
-                    {service.bookings} total bookings
-                  </div>
+                  {/* Removed total bookings for caterer view */}
                 </div>
               </CardContent>
             </Card>

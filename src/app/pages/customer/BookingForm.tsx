@@ -206,17 +206,7 @@ export function BookingForm() {
                     />
                   </div>
 
-                  {/* Special Requests */}
-                  <div className="space-y-2">
-                    <Label htmlFor="requests">Special Requests or Dietary Requirements (Optional)</Label>
-                    <Textarea
-                      id="requests"
-                      placeholder="Any special dietary needs, allergies, or specific requests..."
-                      value={specialRequests}
-                      onChange={(e) => setSpecialRequests(e.target.value)}
-                      rows={4}
-                    />
-                  </div>
+                  {/* Special Requests section removed as requested */}
 
                   {/* Terms Agreement */}
                   <div className="flex items-start gap-3">

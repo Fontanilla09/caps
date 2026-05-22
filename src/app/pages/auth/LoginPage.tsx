@@ -6,7 +6,7 @@ import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../../components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
-import { ChefHat } from "lucide-react";
+// import { ChefHat } from "lucide-react"; (removed)
 
 export function LoginPage() {
   const [email, setEmail] = useState("");
@@ -48,7 +48,7 @@ export function LoginPage() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <ChefHat className="w-12 h-12 text-blue-600" />
+            {/* ChefHat logo removed */}
           </div>
           <CardTitle className="text-2xl">Welcome Back</CardTitle>
           <CardDescription>Sign in to your account to continue</CardDescription>
@@ -62,7 +62,7 @@ export function LoginPage() {
             </TabsList>
             {role === "superadmin" && (
               <div className="mt-2 text-xs text-amber-600 bg-amber-50 border border-amber-200 rounded p-2">
-                ⚠️ Super Admin access is restricted. Email: superadmin@caterai.com
+                ⚠️ Super Admin access is restricted.
               </div>
             )}
           </Tabs>

@@ -34,7 +34,6 @@ export function Navigation() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="flex items-center gap-2">
-            <ChefHat className="w-8 h-8 text-blue-600" />
             <span className="text-xl font-semibold text-slate-900">CaterAI</span>
           </Link>
 
