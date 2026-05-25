@@ -57,8 +57,8 @@ export function Navigation() {
             ) : null}
           </div>
 
-          {/* Mobile Menu Button - only for customer */}
-          {user?.role === "customer" && (
+          {/* Mobile Menu Button - only for authenticated customer */}
+          {isAuthenticated && user?.role === "customer" && (
             <button
               className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-slate-400"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -69,8 +69,8 @@ export function Navigation() {
           )}
         </div>
 
-        {/* Mobile Menu - only for customer */}
-        {user?.role === "customer" && mobileMenuOpen && (
+        {/* Mobile Menu - only for authenticated customer */}
+        {isAuthenticated && user?.role === "customer" && mobileMenuOpen && (
           <div className="md:hidden fixed inset-0 z-40 bg-black bg-opacity-30" onClick={() => setMobileMenuOpen(false)}>
             <div
               className="absolute top-0 left-0 w-64 h-full bg-white shadow-lg p-8 flex flex-col gap-6"
