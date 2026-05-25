@@ -18,6 +18,37 @@ import { useAuth } from "../../context/AuthContext";
 import { Alert, AlertDescription } from "../../components/ui/alert";
 import clsx from "clsx";
 
+// Responsive drawer for sidebar
+function Drawer({ open, onClose, children }: { open: boolean; onClose: () => void; children: React.ReactNode }) {
+  return (
+    <div
+      className={clsx(
+        "fixed inset-0 z-40 flex md:hidden transition-all duration-300",
+        open ? "" : "pointer-events-none"
+      )}
+      aria-hidden={!open}
+    >
+      {/* Overlay */}
+      <div
+        className={clsx(
+          "fixed inset-0 bg-black/30 transition-opacity",
+          open ? "opacity-100" : "opacity-0"
+        )}
+        onClick={onClose}
+      />
+      {/* Drawer panel */}
+      <aside
+        className={clsx(
+          "relative w-64 h-full bg-white border-r border-slate-200 flex flex-col shadow-lg transition-transform duration-300",
+          open ? "translate-x-0" : "-translate-x-full"
+        )}
+      >
+        {children}
+      </aside>
+    </div>
+  );
+}
+
 function SettingsScreen() {
   const { verifyPassword, changePassword } = useAuth();
   const [currentPassword, setCurrentPassword] = useState("");
@@ -392,12 +423,29 @@ export function CustomerDashboard() {
     } else {
       setActive(key);
     }
+    setSidebarOpen(false);
   };
 
+  // Sidebar drawer state for mobile
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <div className="flex min-h-screen bg-slate-50">
-      {/* Sidebar */}
-      <aside className="fixed left-0 top-0 h-full w-64 bg-white border-r border-slate-200 flex flex-col z-20">
+    <div className="min-h-screen bg-slate-50">
+      {/* Header for mobile */}
+      <header className="md:hidden flex items-center justify-between h-16 px-4 border-b border-slate-200 bg-white sticky top-0 z-30">
+        <button
+          className="p-2 rounded hover:bg-slate-100 focus:outline-none"
+          onClick={() => setSidebarOpen(true)}
+          aria-label="Open menu"
+        >
+          <svg width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-menu"><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+        </button>
+        <span className="font-bold text-xl text-blue-700">Customer</span>
+        <span className="w-8" />
+      </header>
+
+      {/* Sidebar for desktop */}
+      <aside className="hidden md:fixed md:left-0 md:top-0 md:h-full md:w-64 md:bg-white md:border-r md:border-slate-200 md:flex md:flex-col md:z-20">
         <div className="h-16 flex items-center justify-center border-b border-slate-200 font-bold text-xl text-blue-700">
           Customer
         </div>
@@ -418,8 +466,30 @@ export function CustomerDashboard() {
         </nav>
       </aside>
 
+      {/* Drawer for mobile */}
+      <Drawer open={sidebarOpen} onClose={() => setSidebarOpen(false)}>
+        <div className="h-16 flex items-center justify-center border-b border-slate-200 font-bold text-xl text-blue-700">
+          Customer
+        </div>
+        <nav className="flex-1 flex flex-col py-6">
+          {menu.map((item) => (
+            <button
+              key={item.key}
+              className={clsx(
+                "flex items-center gap-3 px-6 py-3 text-slate-700 hover:bg-blue-50 transition font-medium text-left",
+                active === item.key && "bg-blue-100 text-blue-700"
+              )}
+              onClick={() => handleMenuClick(item.key)}
+            >
+              {item.icon}
+              {item.label}
+            </button>
+          ))}
+        </nav>
+      </Drawer>
+
       {/* Main Content */}
-      <main className="ml-64 flex-1 p-8">
+      <main className="md:ml-64 p-4 md:p-8">
         <div className="max-w-4xl mx-auto">
           {content[active]}
         </div>
