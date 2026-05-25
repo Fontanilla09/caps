@@ -32,40 +32,70 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   });
 
   const login = async (email: string, password: string, role: UserRole) => {
-    // Mock login - replace with actual API call
-    // For super admin, only allow specific email
+    // Super Admin: only allow specific email
     if (role === "superadmin" && email !== "superadmin@caterai.com") {
       throw new Error("Invalid super admin credentials");
     }
 
+    // Caterer: only allow direct login for caterer@caterai.com
+    if (role === "admin") {
+      if (email === "caterer@caterai.com") {
+        const mockUser: User = {
+          id: "caterer-demo-id",
+          email,
+          name: "Caterer Demo",
+          role,
+          isVerified: true,
+        };
+        setUser(mockUser);
+        localStorage.setItem("user", JSON.stringify(mockUser));
+        localStorage.setItem("user_password", password);
+        return;
+      } else {
+        // All other caterers require verification
+        const mockUser: User = {
+          id: Math.random().toString(36).substr(2, 9),
+          email,
+          name: email.split("@")[0],
+          role,
+          isVerified: false,
+        };
+        setUser(mockUser);
+        localStorage.setItem("user", JSON.stringify(mockUser));
+        localStorage.setItem("user_password", password);
+        throw new Error("Your account is pending verification by the Super Admin.");
+      }
+    }
+
+    // Customer: allow all
     const mockUser: User = {
       id: Math.random().toString(36).substr(2, 9),
       email,
       name: email.split("@")[0],
       role,
-      isVerified: role !== "admin" || Math.random() > 0.5,
+      isVerified: true,
     };
     setUser(mockUser);
     localStorage.setItem("user", JSON.stringify(mockUser));
-
-    // Prototype-only password persistence
     localStorage.setItem("user_password", password);
   };
 
 
   const register = async (email: string, password: string, name: string, role: UserRole) => {
     // Mock registration - replace with actual API call
+    let isVerified = false;
+    if (role === "customer") isVerified = true;
+    if (role === "admin" && email === "caterer@caterai.com") isVerified = true;
+
     const mockUser: User = {
       id: Math.random().toString(36).substr(2, 9),
       email,
       name,
       role,
-      isVerified: role === "customer",
+      isVerified,
     };
     setUser(mockUser);
     localStorage.setItem("user", JSON.stringify(mockUser));
-
-    // Prototype-only password persistence
     localStorage.setItem("user_password", password);
   };
 

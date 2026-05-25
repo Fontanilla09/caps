@@ -17,6 +17,20 @@ Password: (Any password - for demo purposes)
 
 ---
 
+## Caterer Demo Account
+
+For testing and demo purposes, only the following caterer account can log in directly:
+
+```
+Email: caterer@caterai.com
+Password: (Any password - for demo purposes)
+```
+
+- All other caterer accounts will require Super Admin verification before they can log in.
+- If a different caterer email is used, the system will show: "Your account is pending verification by the Super Admin."
+
+---
+
 ## Paano Gumagana ang System
 
 ### 1. **Caterer Registration Flow**
