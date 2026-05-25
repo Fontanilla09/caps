@@ -98,7 +98,7 @@ export function Navigation() {
               </Link>
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-3 py-2 rounded-lg text-left w-full text-slate-700 hover:bg-blue-100 hover:text-red-600 transition"
+                className="flex items-center gap-3 py-2 rounded-lg text-left w-full text-blue-700 hover:bg-blue-100 hover:text-red-600 transition"
               >
                 <LogOut className="w-5 h-5" />
                 <span className="font-medium">Log Out</span>
