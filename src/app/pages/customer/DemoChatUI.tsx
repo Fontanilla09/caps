@@ -26,8 +26,15 @@ const mockChatUsers = [
   },
 ];
 
+type ChatMessage = {
+  sender: string;
+  text?: string;
+  image?: string; // base64 or url
+};
+
 export const DemoChatUI = () => {
   const [selectedUserId, setSelectedUserId] = useState(mockChatUsers[0].id);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   // Expose a global function to select chat user by name (for dashboard chat button)
   React.useEffect(() => {
@@ -52,19 +59,23 @@ export const DemoChatUI = () => {
 
   const handleSend = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    if (!input.trim() && !imagePreview) return;
     // Add message to selected user
     setChatUsers((users) =>
       users.map((u) =>
         u.id === selectedUserId
           ? {
               ...u,
-              messages: [...u.messages, { sender: "You", text: input }],
+              messages: [
+                ...u.messages,
+                { sender: "You", text: input || undefined, image: imagePreview || undefined },
+              ],
             }
           : u
       )
     );
     setInput("");
+    setImagePreview(null);
     // Simulate reply
     setTimeout(() => {
       setChatUsers((users) =>
@@ -81,6 +92,17 @@ export const DemoChatUI = () => {
         )
       );
     }, 1200);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -125,14 +147,35 @@ export const DemoChatUI = () => {
                 }
               >
                 <strong>{msg.sender}:</strong> {msg.text}
+                {msg.image && (
+                  <div className="mt-2">
+                    <img src={msg.image} alt="sent-img" className="max-w-[180px] max-h-40 rounded border" />
+                  </div>
+                )}
               </span>
             </div>
           ))}
           <div ref={messagesEndRef} />
         </div>
-        <form onSubmit={handleSend} className="flex gap-2 mt-2">
+        <form onSubmit={handleSend} className="flex gap-2 mt-2 items-center">
+          <div className="flex gap-2 items-center">
+            {/* Image icon only */}
+            <label className="w-8 h-8 flex items-center justify-center rounded-full bg-slate-200 hover:bg-slate-300 cursor-pointer">
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleImageChange}
+              />
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
+                <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor"/>
+                <circle cx="8.5" cy="10.5" r="1.5" fill="currentColor"/>
+                <path stroke="currentColor" d="M21 19l-5.5-7-4.5 6-3-4-4 5" />
+              </svg>
+            </label>
+          </div>
           <input
-            className="flex-1 border rounded px-3 py-2"
+            className="flex-1 border rounded px-3 py-2 ml-2"
             type="text"
             placeholder={`Message ${selectedUser.name}...`}
             value={input}
@@ -144,6 +187,19 @@ export const DemoChatUI = () => {
           >
             Send
           </button>
+          {imagePreview && (
+            <div className="relative ml-2">
+              <img src={imagePreview} alt="preview" className="w-12 h-12 object-cover rounded" />
+              <button
+                type="button"
+                className="absolute top-0 right-0 bg-red-500 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs"
+                onClick={() => setImagePreview(null)}
+                aria-label="Remove image"
+              >
+                ×
+              </button>
+            </div>
+          )}
         </form>
       </section>
     </div>

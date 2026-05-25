@@ -15,6 +15,7 @@ import {
   CheckCircle2
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
+import { ReservationCalendar } from "../components/ReservationCalendar";
 
 const MOCK_STATS = {
   totalBookings: 24,
@@ -123,7 +124,7 @@ export function AdminDashboard() {
         </div>
 
         {/* Stats Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
           <Card>
             <CardHeader className="pb-3">
               <CardDescription>Total Bookings</CardDescription>
@@ -146,19 +147,6 @@ export function AdminDashboard() {
               <div className="flex items-center gap-2 text-sm text-slate-600">
                 <Calendar className="w-4 h-4" />
                 <span>{MOCK_STATS.upcomingEvents} upcoming events</span>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="pb-3">
-              <CardDescription>Total Revenue</CardDescription>
-              <CardTitle className="text-3xl">₱{(MOCK_STATS.revenue / 1000).toFixed(0)}K</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center gap-2 text-sm text-green-600">
-                <DollarSign className="w-4 h-4" />
-                <span>+18% from last month</span>
               </div>
             </CardContent>
           </Card>
@@ -220,55 +208,8 @@ export function AdminDashboard() {
           </Link>
         </div>
 
-        {/* Upcoming Events */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Upcoming Events</CardTitle>
-            <CardDescription>Events scheduled for the next 7 days</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {MOCK_UPCOMING.map((event) => (
-                <div key={event.id} className="flex items-center justify-between p-4 border rounded-lg hover:bg-slate-50 transition">
-                  <div className="flex items-center gap-4">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-blue-600">
-                        {new Date(event.date).getDate()}
-                      </div>
-                      <div className="text-xs text-slate-600">
-                        {new Date(event.date).toLocaleDateString("en-US", { month: "short" })}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="font-medium">{event.customer}</p>
-                      <p className="text-sm text-slate-600">{event.package}</p>
-                      <div className="flex items-center gap-4 mt-1 text-xs text-slate-500">
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {event.time}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Users className="w-3 h-3" />
-                          {event.guests} guests
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    {event.status === "confirmed" ? (
-                      <Badge variant="default" className="gap-1">
-                        <CheckCircle2 className="w-3 h-3" />
-                        Confirmed
-                      </Badge>
-                    ) : (
-                      <Badge variant="secondary">Pending</Badge>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        {/* Reservation Calendar */}
+        <ReservationCalendar />
       </div>
     </div>
   );

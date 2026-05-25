@@ -15,7 +15,7 @@ export function HomePage() {
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl mb-6">
-              AI-Powered Catering Design & Reservation
+              AI-Assisted Web-Based Catering Reservation and Recommendation System
             </h1>
             <p className="text-xl mb-8 text-blue-100">
               Visualize your dream event before it happens. Book verified caterers with confidence.
