@@ -38,7 +38,8 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6">
+          {/* Desktop Navigation - only visible on md and up */}
+          <div className="hidden md:flex flex-col items-start gap-2">
             {/* Removed Browse Packages and Venue Visualizer links as requested */}
 
             {isAuthenticated ? (
