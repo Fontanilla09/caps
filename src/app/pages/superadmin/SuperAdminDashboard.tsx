@@ -41,6 +41,8 @@ const MOCK_RECENT_ACTIVITY = [
 ];
 
 export function SuperAdminDashboard() {
+  // Filter activities to only show caterer-related (type === 'verification')
+  const catererActivities = MOCK_RECENT_ACTIVITY.filter((activity) => activity.type === "verification");
   return (
     <div className="py-12 px-4 bg-slate-50">
       <div className="container mx-auto max-w-7xl">
@@ -107,7 +109,7 @@ export function SuperAdminDashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {MOCK_RECENT_ACTIVITY.map((activity) => (
+              {catererActivities.map((activity) => (
                 <div key={activity.id} className="flex items-start justify-between p-3 border rounded-lg">
                   <div className="flex items-start gap-3">
                     <div className="w-2 h-2 bg-blue-600 rounded-full mt-2" />
