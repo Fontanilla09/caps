@@ -141,6 +141,7 @@ export function RealtimeChat({ bookingId, customerName, catererName, userRole }:
                 accept="image/*"
                 className="hidden"
                 onChange={handleImageChange}
+                title="Upload image"
               />
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-5 h-5">
                 <rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor"/>

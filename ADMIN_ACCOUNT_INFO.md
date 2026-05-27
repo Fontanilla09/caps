@@ -10,6 +10,7 @@ Ang system ay designed para sa **ISA LANG** na Super Admin account para sa maxim
 
 ```
 Email: superadmin@caterai.com
+caterer@caterai.com
 Password: (Any password - for demo purposes)
 ```
 

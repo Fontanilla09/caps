@@ -22,21 +22,12 @@ const MOCK_PACKAGE = {
   nextAvailableDate: "2026-06-01",
   description: "Complete wedding catering with elegant setup, floral arrangements, and premium menu options. Perfect for couples who want a sophisticated and memorable celebration.",
   features: [
-    "Premium 5-course menu",
     "Elegant table settings and linens",
     "Professional wait staff",
     "Floral centerpieces",
     "Decorative lighting",
-    "Wedding cake",
     "Beverage service",
     "Setup and cleanup",
-  ],
-  menuItems: [
-    "Appetizer: Smoked Salmon Canapés",
-    "Soup: Cream of Mushroom",
-    "Salad: Garden Greens with Vinaigrette",
-    "Main: Choice of Beef Wellington or Grilled Sea Bass",
-    "Dessert: Wedding Cake with Fruit Platter",
   ],
   duration: "6-8 hours",
   serviceArea: "Metro Manila",
@@ -57,16 +48,16 @@ const MOCK_PACKAGE = {
     {
       author: "John Reyes",
       rating: 5,
-      comment: "Professional service and delicious food. Highly recommended! The portions were generous and our guests loved everything.",
+      comment: "Professional service. Highly recommended! The portions were generous and our guests loved everything.",
       date: "2026-03-22",
-      highlights: ["Food Quality", "Professional Staff", "Generous Portions"]
+      highlights: ["Professional Staff", "Generous Portions"]
     },
     {
       author: "Lisa Cruz",
       rating: 4,
-      comment: "Great package overall. Minor timing issues but food was excellent and the setup was beautiful.",
+      comment: "Great package overall. Minor timing issues but the setup was beautiful.",
       date: "2026-02-10",
-      highlights: ["Food Quality", "Setup & Decor"]
+      highlights: ["Setup & Decor"]
     },
   ],
 };
@@ -228,18 +219,7 @@ export function PackageDetails() {
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Menu</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-2">
-                  {MOCK_PACKAGE.menuItems.map((item, idx) => (
-                    <li key={idx} className="text-slate-700">{item}</li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+            {/* Menu card removed as per request */}
 
             <Card>
               <CardHeader>

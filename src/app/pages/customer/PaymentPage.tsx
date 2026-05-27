@@ -12,7 +12,7 @@ import { Smartphone, Banknote, Upload, CheckCircle2, Download, Calendar, AlertCi
 export function PaymentPage() {
   const { bookingId } = useParams();
   const navigate = useNavigate();
-  const [paymentMethod, setPaymentMethod] = useState("gcash");
+  const [paymentMethod, setPaymentMethod] = useState("ewallet");
   const [proofOfPayment, setProofOfPayment] = useState<File | null>(null);
   const [referenceNumber, setReferenceNumber] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -28,8 +28,8 @@ export function PaymentPage() {
     amountDue: 22500,
     balanceDue: 52500,
     balanceDueDate: "2026-06-08",
-    gcashNumber: "0912 345 6789",
-    gcashName: "PREMIUM CATERING CO.",
+    ewalletNumber: "0912 345 6789",
+    ewalletName: "PREMIUM CATERING CO.",
     officeAddress: "123 Business St, Manila, Philippines",
     officeHours: "Mon-Fri 9:00 AM - 5:00 PM",
   };
@@ -44,13 +44,13 @@ export function PaymentPage() {
   const handleSubmitPayment = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (paymentMethod === "gcash" && !proofOfPayment) {
+    if (paymentMethod === "ewallet" && !proofOfPayment) {
       alert("Please upload your proof of payment");
       return;
     }
 
-    if (paymentMethod === "gcash" && !referenceNumber.trim()) {
-      alert("Please enter the GCash reference number");
+    if (paymentMethod === "ewallet" && !referenceNumber.trim()) {
+      alert("Please enter the reference number");
       return;
     }
 
@@ -103,7 +103,7 @@ export function PaymentPage() {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">Payment Method</span>
-                    <span className="capitalize">{paymentMethod === "gcash" ? "GCash" : "Face-to-Face"}</span>
+                    <span className="capitalize">{paymentMethod === "ewallet" ? "E-wallet" : "Face-to-Face"}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">Status</span>
@@ -177,11 +177,11 @@ export function PaymentPage() {
                     <Label>Select Payment Method</Label>
                     <RadioGroup value={paymentMethod} onValueChange={setPaymentMethod}>
                       <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-slate-50">
-                        <RadioGroupItem value="gcash" id="gcash" />
-                        <Label htmlFor="gcash" className="flex-1 cursor-pointer flex items-center gap-3">
+                        <RadioGroupItem value="ewallet" id="ewallet" />
+                        <Label htmlFor="ewallet" className="flex-1 cursor-pointer flex items-center gap-3">
                           <Smartphone className="w-5 h-5 text-blue-600" />
                           <div>
-                            <p className="font-medium">GCash</p>
+                            <p className="font-medium">E-wallet</p>
                             <p className="text-xs text-slate-500">Send payment and upload proof</p>
                           </div>
                         </Label>
@@ -200,42 +200,41 @@ export function PaymentPage() {
                     </RadioGroup>
                   </div>
 
-                  {/* GCash Instructions */}
-                  {paymentMethod === "gcash" && (
+                  {/* E-wallet Instructions */}
+                  {paymentMethod === "ewallet" && (
                     <div className="space-y-4 pt-4 border-t">
                       <Alert className="border-blue-200 bg-blue-50">
                         <Smartphone className="w-4 h-4 text-blue-600" />
                         <AlertDescription className="text-blue-900">
-                          <p className="font-medium mb-2">GCash Payment Instructions:</p>
+                          <p className="font-medium mb-2">E-wallet Payment Instructions:</p>
                           <ol className="text-sm space-y-1 list-decimal list-inside">
-                            <li>Send ₱{BOOKING.amountDue.toLocaleString()} to the GCash number below</li>
+                            <li>Send ₱{BOOKING.amountDue.toLocaleString()} to the e-wallet number below</li>
                             <li>Take a screenshot of the transaction receipt</li>
                             <li>Upload the proof of payment below</li>
-                            <li>Enter the GCash reference number</li>
+                            <li>Enter the reference number</li>
                           </ol>
                         </AlertDescription>
                       </Alert>
 
                       <div className="bg-slate-50 rounded-lg p-4 space-y-2">
                         <div className="flex justify-between items-center">
-                          <span className="text-sm text-slate-600">GCash Number:</span>
-                          <span className="text-lg font-bold text-blue-600">{BOOKING.gcashNumber}</span>
+                          <span className="text-sm text-slate-600">E-wallet Number:</span>
+                          <span className="text-lg font-bold text-blue-600">{BOOKING.ewalletNumber}</span>
                         </div>
                         <div className="flex justify-between items-center">
                           <span className="text-sm text-slate-600">Account Name:</span>
-                          <span className="font-medium">{BOOKING.gcashName}</span>
+                          <span className="font-medium">{BOOKING.ewalletName}</span>
                         </div>
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor="reference">GCash Reference Number *</Label>
+                        <Label htmlFor="reference">Reference Number *</Label>
                         <Input
                           id="reference"
-                          placeholder="Enter 13-digit reference number"
+                          placeholder="Enter reference number"
                           value={referenceNumber}
                           onChange={(e) => setReferenceNumber(e.target.value)}
                           required
-                          maxLength={13}
                         />
                       </div>
 

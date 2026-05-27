@@ -44,9 +44,9 @@ export function HomePage() {
                 <div className="bg-white rounded-lg p-4 border border-blue-100">
                   <div className="flex items-center gap-2 mb-2">
                     <Smartphone className="w-5 h-5 text-blue-600" />
-                    <span className="font-medium">GCash Payment</span>
+                    <span className="font-medium">E-wallet Payment</span>
                   </div>
-                  <p className="text-sm text-slate-700">Send payment to the caterer's GCash number and upload your transaction receipt for verification.</p>
+                  <p className="text-sm text-slate-700">Send payment to the caterer's e-wallet number and upload your transaction receipt for verification.</p>
                 </div>
                 <div className="bg-white rounded-lg p-4 border border-blue-100">
                   <div className="flex items-center gap-2 mb-2">
